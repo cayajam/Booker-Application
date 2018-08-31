@@ -55,4 +55,9 @@ public class TravelPackageController {
 		travelPackageService.deleteTravelPackages(travelPackages);
 	}
 	
+	@DeleteMapping("/{travelPackageId}")
+	public void deleteTravelPackageById(@PathVariable("travelPackageId") int travelPackageId) {
+		travelPackageService.deleteTravelPackageById(travelPackageId);
+	}
+	
 }

@@ -41,10 +41,10 @@ public class TravelPackageService {
 				image.setTravelPackage(travelPackage);
 				imageService.saveImage(image);
 			}
+			travelServiceService.saveAvailedServices(travelPackage.getAvailableServiceList());
 			for (TravelService travelService : travelPackage.getAvailableServiceList()) {
 				travelService.setTravelPackage(travelPackage);
-				travelServiceService.saveTravelService(travelService);
-
+				//travelServiceService.saveTravelService(travelService);
 				for (Image serviceImage : travelService.getImages()) {
 					serviceImage.setService(travelService);
 					imageService.saveImage(serviceImage);
@@ -52,6 +52,13 @@ public class TravelPackageService {
 			}
 		}
 		return travelPackages;
+	}
+	
+	@Transactional
+	public TravelPackage saveTravelPackage(TravelPackage travelPackage) {
+		travelPackage = travelPackageRepository.save(travelPackage);
+		
+		return travelPackage;
 	}
 	
 	@Transactional
@@ -105,6 +112,17 @@ public class TravelPackageService {
 		}
 		travelPackageRepository.deleteAll(travelPackages);
 
+	}
+	
+	@Transactional
+	public void deleteTravelPackageById(int travelPackageId) {
+		TravelPackage travelPackage = travelPackageRepository.findById(travelPackageId).get();
+		imageService.deleteImages(travelPackage.getImages());
+		for (TravelService travelService : travelPackage.getAvailableServiceList()) {
+			imageService.deleteImages(travelService.getImages());
+		}
+		travelServiceService.deleteTravelServices(travelPackage.getAvailableServiceList());
+		travelPackageRepository.delete(travelPackage);
 	}
 
 }

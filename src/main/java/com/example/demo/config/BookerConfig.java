@@ -32,8 +32,8 @@ public class BookerConfig {
 	}
 	
 	@Bean
-	public TravelServiceService travelServiceService(TravelServiceRepository travelServiceRepository) {
-		return new TravelServiceService(travelServiceRepository);
+	public TravelServiceService travelServiceService(TravelServiceRepository travelServiceRepository, ImageService imageService) {
+		return new TravelServiceService(travelServiceRepository, imageService);
 	}
 
 }
