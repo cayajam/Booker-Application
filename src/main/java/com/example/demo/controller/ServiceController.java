@@ -11,7 +11,6 @@ import com.example.demo.service.TravelServiceService;
 public class ServiceController {
 
 	private TravelServiceService travelService;
-	private ImageService imageService;
 
 	public ServiceController(TravelServiceService travelService) {
 		super();

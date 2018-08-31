@@ -28,45 +28,38 @@ public class CustomerController {
 	}
 	
 	@GetMapping
-	@Transactional
 	public List<Customer> findAll() {
 		return (List<Customer>) customerService.findAll();
 	}
 	
 	@GetMapping("/{customerId}")
-	@Transactional
 	public Customer findById(@PathVariable("customerId") int customerId) {
 		return customerService.findById(customerId);
 	}
 	
 	@PostMapping
-	@Transactional
 	public Customer saveCustomer(@RequestBody Customer customer) {
 		return customerService.saveCustomer(customer);
 	}
 	
 	@PutMapping
-	@Transactional
 	public Customer updateCustomer(@RequestBody Customer customer) {
 		customer.setCustomerId(customer.getCustomerId());
 		return customerService.saveCustomer(customer);
 	}
 	
 	@PutMapping("/{customerId}")
-	@Transactional
 	public Customer updateById(@PathVariable("customerId") int customerId, @RequestBody Customer customer) {
 		customer.setCustomerId(customerId);
 		return customerService.saveCustomer(customer);
 	}
 	
 	@DeleteMapping
-	@Transactional
 	public void deleteCustomerList(@RequestBody List<Customer> customers) {
 		customerService.deleteCustomerList(customers);
 	}
 	
 	@DeleteMapping("/{customerId}")
-	@Transactional
 	public void deleteCustomerList(@PathVariable("customerId") int customerId) {
 		customerService.deleteCustomer(customerService.findById(customerId));
 	}
